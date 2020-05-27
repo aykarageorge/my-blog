@@ -1,0 +1,56 @@
+{
+  "kind": "collectionType",
+  "collectionName": "posts",
+  "info": {
+    "name": "post"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "default": "Blog Post",
+      "unique": true
+    },
+    "content": {
+      "type": "richtext",
+      "default": "Ideas and shit go here",
+      "required": true
+    },
+    "posted_on": {
+      "type": "date",
+      "required": true
+    },
+    "media": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "files",
+        "images",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": true
+    },
+    "blog_id": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true,
+      "maxLength": 16
+    },
+    "is_live": {
+      "type": "boolean",
+      "default": false,
+      "required": false,
+      "private": false
+    },
+    "categories": {
+      "collection": "category",
+      "via": "posts",
+      "dominant": true
+    }
+  }
+}

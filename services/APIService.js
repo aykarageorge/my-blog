@@ -5,8 +5,8 @@ let getAllPostsAPI = 'http://localhost:1337/posts';
 async function getAPI(url) {
     console.log(url);
     const response = await fetch(url);
-    const myJson = await response.json(); 
-    console.log(myJson);
+    const myJson = await response.json();
+    // console.log(myJson);
     return myJson;
 }
 
