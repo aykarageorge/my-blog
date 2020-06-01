@@ -84,246 +84,475 @@
 						<div class="col-md-4 d-flex">
 							<div class="blog-entry ftco-animate active">
 								<div class="carousel-blog owl-carousel">
+									<%
+									resultJSON[0].media.forEach(element => {
+										if(element.type.includes("image")) {
+									%>
 									<div class="item">
-										<a href="" class="img"></a>
+										<a href="#" class="img"
+											style="background-image: url('http://localhost:1337<%= element.url %>');"></a>
 									</div>
-									<div class="item">
-										<a href="single.html" class="img"
-											style="background-image: url(images/image_7.jpg);"></a>
-									</div>
-									<div class="item">
-										<a href="single.html" class="img"
-											style="background-image: url(images/image_8.jpg);"></a>
-									</div>
-								</div>
-								<div class="text p-4">
-									<h3 class="mb-2"><a href="single.html">row 1 col 1: A Loving Heart is the Truest
-											Wisdom</a></h3>
-									<div class="meta-wrap">
-										<p class="meta">
-											<span><i class="icon-calendar mr-2"></i>Sept. 10, 2019</span>
-											<span><a href="single.html"><i
-														class="icon-folder-o mr-2"></i>Travel</a></span>
-											<span><i class="icon-comment2 mr-2"></i>5 Comment</span>
-										</p>
-									</div>
-									<p class="mb-4">A small river named Duden flows by their place and supplies</p>
-									<p><a href="#" class="btn-custom">Read More <span
-												class="ion-ios-arrow-forward"></span></a></p>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-md-8 d-flex">
-							<div class="row">
-
-								<!-- col 2 -->
-								<div class="col-md-12">
+									<% 
+										}
+										if(element.type.includes("video")) {
+									%>
 									<div class="blog-entry ftco-animate d-md-flex align-items-center">
-										<a href="https://vimeo.com/45830194"
+										<a href="http://localhost:1337<%= element.url %>"
 											class="img img-2 popup-vimeo d-flex align-items-center justify-content-center"
-											style="background-image: url(images/image_2.jpg);">
+											style="background-image: url('http://localhost:1337<%= resultJSON[0].headmast_url %>'); width: 100%;">
 											<div class="icon d-flex align-items-center justify-content-center">
 												<span class="ion-ios-play"></span>
 											</div>
 										</a>
-										<div class="text text-2 p-4">
-											<h3 class="mb-2"><a href="single.html">row 1 col 2: A Loving Heart is the
-													Truest Wisdom</a></h3>
-											<div class="meta-wrap">
-												<p class="meta">
-													<span><i class="icon-calendar mr-2"></i>Sept. 10, 2019</span>
-													<span><a href="single.html"><i
-																class="icon-folder-o mr-2"></i>Travel</a></span>
-													<span><i class="icon-comment2 mr-2"></i>5 Comment</span>
-												</p>
-											</div>
-											<p class="mb-4">A small river named Duden flows by their place and supplies
-											</p>
-											<p><a href="#" class="btn-custom">Read More <span
-														class="ion-ios-arrow-forward"></span></a></p>
-										</div>
 									</div>
+									<% 
+										}
+									}); 
+									%>
 								</div>
-
-								<!-- col 3 -->
-								<div class="col-md-12">
-									<div class="blog-entry ftco-animate d-md-flex align-items-center">
-										<a href="single.html" class="img img-2 order-md-last"
-											style="background-image: url(images/image_3.jpg);"></a>
-										<div class="text text-2 text-md-right p-4">
-											<h3 class="mb-2"><a href="single.html">row 1 col 3: A Loving Heart is the
-													Truest Wisdom</a></h3>
-											<div class="meta-wrap">
-												<p class="meta">
-													<span><i class="icon-calendar mr-2"></i>Sept. 10, 2019</span>
-													<span><a href="single.html"><i
-																class="icon-folder-o mr-2"></i>Travel</a></span>
-													<span><i class="icon-comment2 mr-2"></i>5 Comment</span>
-												</p>
-											</div>
-											<p class="mb-4">A small river named Duden flows by their place and supplies
-											</p>
-											<p><a href="#" class="btn-custom">Read More <span
-														class="ion-ios-arrow-forward"></span></a></p>
-										</div>
-									</div>
-								</div>
-
-							</div>
-						</div>
-
-						<!-- row 2 -->
-						<!-- col 1 -->
-						<div class="col-md-4 d-flex">
-							<div class="blog-entry ftco-animate">
-								<a href="single.html" class="img"
-									style="background-image: url(images/image_4.jpg);"></a>
 								<div class="text p-4">
-									<h3 class="mb-2"><a href="single.html">row 2 col 1: A Loving Heart is the Truest
-											Wisdom</a></h3>
+									<h3 class="mb-2"><a
+											href="http://localhost:1337/<%= resultJSON[0].url %>"><%= resultJSON[0].title %></a>
+									</h3>
 									<div class="meta-wrap">
 										<p class="meta">
-											<span><i class="icon-calendar mr-2"></i>Sept. 10, 2019</span>
-											<span><a href="single.html"><i
-														class="icon-folder-o mr-2"></i>Travel</a></span>
+											<span><i
+													class="icon-calendar mr-2"></i><%= resultJSON[0].posted_on %></span>
+											<span><a href="single.html"><i class="icon-folder-o mr-2"></i>
+													<%
+															var categoryResult = '';
+															resultJSON[0].category.forEach(cat => {
+																categoryResult += cat + ', ';
+															});
+														%>
+													<%= categoryResult.slice(0, -2) %>
+												</a></span>
 											<span><i class="icon-comment2 mr-2"></i>5 Comment</span>
 										</p>
 									</div>
-									<p class="mb-4">A small river named Duden flows by their place and supplies</p>
-									<p><a href="#" class="btn-custom">Read More <span
-												class="ion-ios-arrow-forward"></span></a></p>
+									<p class="mb-4">
+										<%- resultJSON[0].content %>
+									</p>
+									<p><a href="http://localhost:1337/<%= resultJSON[0].url %>" class="btn-custom">Read
+											More <span class="ion-ios-arrow-forward"></span></a></p>
 								</div>
 							</div>
 						</div>
 
-						<!-- col 2 -->
-						<div class="col-md-4 d-flex">
-							<div class="blog-entry ftco-animate">
-								<a href="single.html" class="img"
-									style="background-image: url(images/image_5.jpg);"></a>
-								<div class="text p-4">
-									<h3 class="mb-2"><a href="single.html">row 2 col 2: A Loving Heart is the Truest
-											Wisdom</a></h3>
-									<div class="meta-wrap">
-										<p class="meta">
-											<span><i class="icon-calendar mr-2"></i>Sept. 10, 2019</span>
-											<span><a href="single.html"><i
-														class="icon-folder-o mr-2"></i>Travel</a></span>
-											<span><i class="icon-comment2 mr-2"></i>5 Comment</span>
-										</p>
-									</div>
-									<p class="mb-4">A small river named Duden flows by their place and supplies</p>
-									<p><a href="#" class="btn-custom">Read More <span
-												class="ion-ios-arrow-forward"></span></a></p>
-								</div>
-							</div>
-						</div>
-
-						<!-- col 3 -->
-						<div class="col-md-4 d-flex">
-							<div class="blog-entry ftco-animate">
-								<a href="single.html" class="img"
-									style="background-image: url(images/image_6.jpg);"></a>
-								<div class="text p-4">
-									<h3 class="mb-2"><a href="single.html">row 2 col 3: A Loving Heart is the Truest
-											Wisdom</a></h3>
-									<div class="meta-wrap">
-										<p class="meta">
-											<span><i class="icon-calendar mr-2"></i>Sept. 10, 2019</span>
-											<span><a href="single.html"><i
-														class="icon-folder-o mr-2"></i>Travel</a></span>
-											<span><i class="icon-comment2 mr-2"></i>5 Comment</span>
-										</p>
-									</div>
-									<p class="mb-4">A small river named Duden flows by their place and supplies</p>
-									<p><a href="#" class="btn-custom">Read More <span
-												class="ion-ios-arrow-forward"></span></a></p>
-								</div>
-							</div>
-						</div>
-
-						<!-- row 3 -->
 						<div class="col-md-8 d-flex">
 							<div class="row">
-
-								<!-- col 1 -->
-								<div class="col-md-12">
-									<div class="blog-entry ftco-animate d-md-flex align-items-center">
-										<a href="single.html" class="img img-2"
-											style="background-image: url(images/image_7.jpg);"></a>
-										<div class="text text-2 p-4">
-											<h3 class="mb-2"><a href="single.html">row 3 col 1: A Loving Heart is the
-													Truest Wisdom</a></h3>
-											<div class="meta-wrap">
-												<p class="meta">
-													<span><i class="icon-calendar mr-2"></i>Sept. 10, 2019</span>
-													<span><a href="single.html"><i
-																class="icon-folder-o mr-2"></i>Travel</a></span>
-													<span><i class="icon-comment2 mr-2"></i>5 Comment</span>
-												</p>
-											</div>
-											<p class="mb-4">A small river named Duden flows by their place and supplies
-											</p>
-											<p><a href="#" class="btn-custom">Read More <span
-														class="ion-ios-arrow-forward"></span></a></p>
-										</div>
-									</div>
-								</div>
 
 								<!-- col 2 -->
 								<div class="col-md-12">
 									<div class="blog-entry ftco-animate d-md-flex align-items-center">
-										<a href="single.html" class="img img-2 order-md-last"
-											style="background-image: url(images/image_8.jpg);"></a>
-										<div class="text text-2 p-4 text-md-right">
-											<h3 class="mb-2"><a href="single.html">row 3 col 2: A Loving Heart is the
-													Truest Wisdom</a></h3>
-											<div class="meta-wrap">
-												<p class="meta">
-													<span><i class="icon-calendar mr-2"></i>Sept. 10, 2019</span>
-													<span><a href="single.html"><i
-																class="icon-folder-o mr-2"></i>Travel</a></span>
-													<span><i class="icon-comment2 mr-2"></i>5 Comment</span>
-												</p>
+										<%
+										var tempHeadMast = '';
+										resultJSON[1].media.forEach(element => {
+											if(element.type.includes("video")) {
+												tempHeadMast = element.url;
+											}
+										});
+
+										if(! tempHeadMast === '') {
+									%>
+										<a href="http://localhost:1337<%= tempHeadMast %>"
+											class="img img-2 popup-vimeo d-flex align-items-center justify-content-center"
+											style="background-image: url('http://localhost:1337<%= resultJSON[1].headmast_url %>'); width: 100%;">
+											<div class="icon d-flex align-items-center justify-content-center">
+												<span class="ion-ios-play"></span>
 											</div>
-											<p class="mb-4">A small river named Duden flows by their place and supplies
+										</a>
+									</div>
+									<% 
+										} else {
+									%>
+									<a href="#" class="img img-2 order-md-first"
+										style="background-image: url('http://localhost:1337<%= resultJSON[1].headmast_url %>');"></a>
+									<%
+										}
+									%>
+									<div class="text text-2 p-4">
+										<h3 class="mb-2"><a
+												href="http://localhost:1337/<%= resultJSON[1].url %>"><%= resultJSON[1].title %></a>
+										</h3>
+										<div class="meta-wrap">
+											<p class="meta">
+												<span><i
+														class="icon-calendar mr-2"></i><%= resultJSON[1].posted_on %></span>
+												<span><a href="single.html"><i class="icon-folder-o mr-2"></i>
+														<%
+																	var categoryResult = '';
+																	resultJSON[1].category.forEach(cat => {
+																		categoryResult += cat + ', ';
+																	});
+																%>
+														<%= categoryResult.slice(0, -2) %>
+													</a></span>
+												<span><i class="icon-comment2 mr-2"></i>5 Comment</span>
 											</p>
-											<p><a href="#" class="btn-custom">Read More <span
-														class="ion-ios-arrow-forward"></span></a></p>
 										</div>
+										<p class="mb-4"> <%- resultJSON[1].content %> </p>
+										<p><a href="http://localhost:1337/<%= resultJSON[1].url %>"
+												class="btn-custom">Read
+												More <span class="ion-ios-arrow-forward"></span></a></p>
 									</div>
 								</div>
-
 							</div>
-						</div>
 
-						<!-- col 3 -->
-						<div class="col-md-4 d-flex">
-							<div class="blog-entry ftco-animate">
-								<a href="single.html" class="img"
-									style="background-image: url(images/image_6.jpg);"></a>
-								<div class="text p-4">
-									<h3 class="mb-2"><a href="single.html">row 3 col 3: A Loving Heart is the Truest
-											Wisdom</a></h3>
+							<!-- col 3 -->
+							<div class="col-md-12">
+								<div class="blog-entry ftco-animate d-md-flex align-items-center">
+									<%
+										var tempHeadMast = '';
+										resultJSON[1].media.forEach(element => {
+											if(element.type.includes("video")) {
+												tempHeadMast = element.url;
+											}
+										});
+								
+										if(! tempHeadMast === '') {
+									%>
+									<a href="http://localhost:1337<%= tempHeadMast %>"
+										class="img img-2 popup-vimeo d-flex align-items-center justify-content-center"
+										style="background-image: url('http://localhost:1337<%= resultJSON[1].headmast_url %>'); width: 100%;">
+										<div class="icon d-flex align-items-center justify-content-center">
+											<span class="ion-ios-play"></span>
+										</div>
+									</a>
+								</div>
+								<% 
+											} else {
+										%>
+								<a href="#" class="img img-2 order-md-last"
+									style="background-image: url('http://localhost:1337<%= resultJSON[1].headmast_url %>');"></a>
+								<%
+											}
+									%>
+								<div class="text text-2 text-md-right p-4">
+									<h3 class="mb-2"><a href="http://localhost:1337/<%= resultJSON[1].url %>"></a></h3>
 									<div class="meta-wrap">
 										<p class="meta">
-											<span><i class="icon-calendar mr-2"></i>Sept. 10, 2020</span>
-											<span><a href="single.html"><i
-														class="icon-folder-o mr-2"></i>Travel</a></span>
+											<span><i
+													class="icon-calendar mr-2"></i><%= resultJSON[1].posted_on %></span>
+											<span><a href="single.html"><i class="icon-folder-o mr-2"></i>
+													<%
+															var categoryResult = '';
+															resultJSON[1].category.forEach(cat => {
+																categoryResult += cat + ', ';
+															});
+														%>
+													<%= categoryResult.slice(0, -2) %>
+												</a></span>
 											<span><i class="icon-comment2 mr-2"></i>5 Comment</span>
 										</p>
 									</div>
-									<p class="mb-4">A small river named Duden flows by their place and supplies</p>
-									<p><a href="#" class="btn-custom">Read More <span
-												class="ion-ios-arrow-forward"></span></a></p>
+									<p class="mb-4"><%- resultJSON[1].content %></p>
+									<p><a href="http://localhost:1337/<%= resultJSON[1].url %>" class="btn-custom">Read
+											More <span class="ion-ios-arrow-forward"></span></a></p>
 								</div>
 							</div>
 						</div>
 
+					</div>
+				</div>
 
-						<!-- row 4 -->
-						<!-- 					
+				<!-- row 2 -->
+				<!-- col 1 -->
+				<div class="col-md-4 d-flex">
+					<div class="blog-entry ftco-animate">
+						<a href="http://localhost:1337/<%= resultJSON[1].url %>" class="img"
+							style="background-image: url('http://localhost:1337<%= resultJSON[1].headmast_url %>');"></a>
+						<div class="text p-4">
+							<h3 class="mb-2"><a
+									href="http://localhost:1337/<%= resultJSON[1].url %>"><%= resultJSON[1].title %></a>
+							</h3>
+							<div class="meta-wrap">
+								<p class="meta">
+									<span><i class="icon-calendar mr-2"></i><%= resultJSON[1].posted_on %></span>
+									<span><a href="single.html"><i class="icon-folder-o mr-2"></i>
+											<%
+											var categoryResult = '';
+											resultJSON[1].category.forEach(cat => {
+												categoryResult += cat + ', ';
+											});
+										%>
+											<%= categoryResult.slice(0, -2) %>
+										</a></span>
+									<span><i class="icon-comment2 mr-2"></i>5 Comment</span>
+								</p>
+							</div>
+							<p class="mb-4"><%- resultJSON[1].content %></p>
+							<p><a href="http://localhost:1337/<%= resultJSON[1].url %>" class=" btn-custom">Read More
+									<span class="ion-ios-arrow-forward"></span></a>
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- col 2 -->
+				<div class="col-md-4 d-flex">
+					<div class="blog-entry ftco-animate">
+						<div class="carousel-blog owl-carousel">
+							<%
+										resultJSON[0].media.forEach(element => {
+											if(element.type.includes("image")) {
+										%>
+							<div class="item">
+								<a href="#" class="img"
+									style="background-image: url('http://localhost:1337<%= element.url %>');"></a>
+							</div>
+							<% 
+											}
+											if(element.type.includes("video")) {
+										%>
+							<div class="blog-entry ftco-animate d-md-flex align-items-center">
+								<a href="http://localhost:1337<%= element.url %>"
+									class="img img-2 popup-vimeo d-flex align-items-center justify-content-center"
+									style="background-image: url('http://localhost:1337<%= resultJSON[0].headmast_url %>'); width: 100%;">
+									<div class="icon d-flex align-items-center justify-content-center">
+										<span class="ion-ios-play"></span>
+									</div>
+								</a>
+							</div>
+							<% 
+											}
+										}); 
+										%>
+						</div>
+						<div class="text p-4">
+							<h3 class="mb-2"><a
+									href="http://localhost:1337/<%= resultJSON[1].url %>"><%= resultJSON[1].title %></a>
+							</h3>
+							<div class="meta-wrap">
+								<p class="meta">
+									<span><i class="icon-calendar mr-2"></i><%= resultJSON[1].posted_on %></span>
+									<span><a href="single.html"><i class="icon-folder-o mr-2"></i>
+											<%
+															var categoryResult = '';
+															resultJSON[1].category.forEach(cat => {
+																categoryResult += cat + ', ';
+															});
+														%>
+											<%= categoryResult.slice(0, -2) %>
+										</a></span>
+									<span><i class="icon-comment2 mr-2"></i>5 Comment</span>
+								</p>
+							</div>
+							<p class="mb-4"><%- resultJSON[1].content %></p>
+							<p><a href="http://localhost:1337/<%= resultJSON[1].url %>" class=" btn-custom">Read More
+									<span class="ion-ios-arrow-forward"></span></a>
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- col 3 -->
+				<div class="col-md-4 d-flex">
+					<div class="blog-entry ftco-animate">
+						<a href="http://localhost:1337/<%= resultJSON[1].url %>" class="img"
+							style="background-image: url('http://localhost:1337<%= resultJSON[1].headmast_url %>');"></a>
+						<div class="text p-4">
+							<h3 class="mb-2"><a
+									href="http://localhost:1337/<%= resultJSON[1].url %>"><%= resultJSON[1].title %></a>
+							</h3>
+							<div class="meta-wrap">
+								<p class="meta">
+									<span><i class="icon-calendar mr-2"></i><%= resultJSON[1].posted_on %></span>
+									<span><a href="single.html"><i class="icon-folder-o mr-2"></i>
+											<%
+															var categoryResult = '';
+															resultJSON[1].category.forEach(cat => {
+																categoryResult += cat + ', ';
+															});
+														%>
+											<%= categoryResult.slice(0, -2) %>
+										</a></span>
+									<span><i class="icon-comment2 mr-2"></i>5 Comment</span>
+								</p>
+							</div>
+							<p class="mb-4"><%- resultJSON[1].content %></p>
+							<p><a href="http://localhost:1337/<%= resultJSON[1].url %>" class=" btn-custom">Read More
+									<span class="ion-ios-arrow-forward"></span></a>
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<!-- row 3 -->
+				<div class="col-md-8 d-flex">
+					<div class="row">
+
+						<!-- col 1 -->
+						<div class="col-md-12">
+							<div class="blog-entry ftco-animate d-md-flex align-items-center">
+								<%
+																var tempHeadMast = '';
+																resultJSON[1].media.forEach(element => {
+																	if(element.type.includes("video")) {
+																		tempHeadMast = element.url;
+																	}
+																});
+						
+																if(! tempHeadMast === '') {
+															%>
+								<a href="http://localhost:1337<%= tempHeadMast %>"
+									class="img img-2 popup-vimeo d-flex align-items-center justify-content-center"
+									style="background-image: url('http://localhost:1337<%= resultJSON[1].headmast_url %>'); width: 100%;">
+									<div class="icon d-flex align-items-center justify-content-center">
+										<span class="ion-ios-play"></span>
+									</div>
+								</a>
+							</div>
+							<% 
+																} else {
+															%>
+							<a href="#" class="img img-2 order-md-first"
+								style="background-image: url('http://localhost:1337<%= resultJSON[1].headmast_url %>');"></a>
+							<%
+																}
+															%>
+							<div class="text text-2 p-4">
+								<h3 class="mb-2"><a
+										href="http://localhost:1337/<%= resultJSON[1].url %>"><%= resultJSON[1].title %></a>
+								</h3>
+								<div class="meta-wrap">
+									<p class="meta">
+										<span><i class="icon-calendar mr-2"></i><%= resultJSON[1].posted_on %></span>
+										<span><a href="single.html"><i class="icon-folder-o mr-2"></i>
+												<%
+																							var categoryResult = '';
+																							resultJSON[1].category.forEach(cat => {
+																								categoryResult += cat + ', ';
+																							});
+																						%>
+												<%= categoryResult.slice(0, -2) %>
+											</a></span>
+										<span><i class="icon-comment2 mr-2"></i>5 Comment</span>
+									</p>
+								</div>
+								<p class="mb-4"> <%- resultJSON[1].content %> </p>
+								<p><a href="http://localhost:1337/<%= resultJSON[1].url %>" class="btn-custom">Read
+										More <span class="ion-ios-arrow-forward"></span></a></p>
+							</div>
+						</div>
+					</div>
+
+					<!-- col 2 -->
+					<div class="col-md-12">
+						<div class="blog-entry ftco-animate d-md-flex align-items-center">
+							<%
+															var tempHeadMast = '';
+															resultJSON[1].media.forEach(element => {
+																if(element.type.includes("video")) {
+																	tempHeadMast = element.url;
+																}
+															});
+													
+															if(! tempHeadMast === '') {
+														%>
+							<a href="http://localhost:1337<%= tempHeadMast %>"
+								class="img img-2 popup-vimeo d-flex align-items-center justify-content-center"
+								style="background-image: url('http://localhost:1337<%= resultJSON[1].headmast_url %>'); width: 100%;">
+								<div class="icon d-flex align-items-center justify-content-center">
+									<span class="ion-ios-play"></span>
+								</div>
+							</a>
+						</div>
+						<% 
+																} else {
+															%>
+						<a href="#" class="img img-2 order-md-last"
+							style="background-image: url('http://localhost:1337<%= resultJSON[1].headmast_url %>');"></a>
+						<%
+																}
+														%>
+						<div class="text text-2 text-md-right p-4">
+							<h3 class="mb-2"><a href="http://localhost:1337/<%= resultJSON[1].url %>"></a></h3>
+							<div class="meta-wrap">
+								<p class="meta">
+									<span><i class="icon-calendar mr-2"></i><%= resultJSON[1].posted_on %></span>
+									<span><a href="single.html"><i class="icon-folder-o mr-2"></i>
+											<%
+																				var categoryResult = '';
+																				resultJSON[1].category.forEach(cat => {
+																					categoryResult += cat + ', ';
+																				});
+																			%>
+											<%= categoryResult.slice(0, -2) %>
+										</a></span>
+									<span><i class="icon-comment2 mr-2"></i>5 Comment</span>
+								</p>
+							</div>
+							<p class="mb-4"><%- resultJSON[1].content %></p>
+							<p><a href="http://localhost:1337/<%= resultJSON[1].url %>" class="btn-custom">Read
+									More <span class="ion-ios-arrow-forward"></span></a></p>
+						</div>
+					</div>
+				</div>
+
+		</div>
+	</div>
+
+	<!-- col 3 -->
+	<div class="col-md-4 d-flex">
+		<div class="blog-entry ftco-animate">
+			<div class="carousel-blog owl-carousel">
+				<%
+				resultJSON[0].media.forEach(element => {
+					if(element.type.includes("image")) {
+				%>
+				<div class="item">
+					<a href="#" class="img"
+						style="background-image: url('http://localhost:1337<%= element.url %>');"></a>
+				</div>
+				<% 
+					}
+					if(element.type.includes("video")) {
+				%>
+				<div class="blog-entry ftco-animate d-md-flex align-items-center">
+					<a href="http://localhost:1337<%= element.url %>"
+						class="img img-2 popup-vimeo d-flex align-items-center justify-content-center"
+						style="background-image: url('http://localhost:1337<%= resultJSON[0].headmast_url %>'); width: 100%;">
+						<div class="icon d-flex align-items-center justify-content-center">
+							<span class="ion-ios-play"></span>
+						</div>
+					</a>
+				</div>
+				<% 
+					}
+				}); 
+				%>
+			</div>
+			<div class="text p-4">
+				<h3 class="mb-2"><a href="http://localhost:1337/<%= resultJSON[0].url %>"><%= resultJSON[0].title %></a>
+				</h3>
+				<div class="meta-wrap">
+					<p class="meta">
+						<span><i class="icon-calendar mr-2"></i><%= resultJSON[0].posted_on %></span>
+						<span><a href="single.html"><i class="icon-folder-o mr-2"></i>
+								<%
+									var categoryResult = '';
+									resultJSON[0].category.forEach(cat => {
+										categoryResult += cat + ', ';
+									});
+								%>
+								<%= categoryResult.slice(0, -2) %>
+							</a></span>
+						<span><i class="icon-comment2 mr-2"></i>5 Comment</span>
+					</p>
+				</div>
+				<p class="mb-4">
+					<%- resultJSON[0].content %>
+				</p>
+				<p><a href="http://localhost:1337/<%= resultJSON[0].url %>" class="btn-custom">Read
+						More <span class="ion-ios-arrow-forward"></span></a></p>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- row 4 -->
+	<!-- 					
 						<div class="col-md-4 d-flex">
 							<div class="blog-entry ftco-animate">
 								<a href="single.html" class="img" style="background-image: url(images/image_4.jpg);"></a>
@@ -379,10 +608,10 @@
 -->
 
 
-					</div>
-				</div>
-			</section>
-		</div><!-- END COLORLIB-MAIN -->
+	</div>
+	</div>
+	</section>
+	</div><!-- END COLORLIB-MAIN -->
 	</div><!-- END COLORLIB-PAGE -->
 
 	<!-- loader -->

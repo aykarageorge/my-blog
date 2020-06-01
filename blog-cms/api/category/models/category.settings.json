@@ -14,8 +14,7 @@
     },
     "posts": {
       "via": "categories",
-      "collection": "post",
-      "private": true
+      "collection": "post"
     },
     "category": {
       "type": "string",

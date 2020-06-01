@@ -1,13 +1,22 @@
+/*
+
+**** Dummy file for extnded API ****
+
+*/
+
+
+/*
 const express = require('express');
 const router = express.Router();
 
 module.exports = (params) => {
-    const {apiService} = params;
+    const apiService = params;
 
-    router.get('/', async (request, response) => {
-        const resultJSON = await apiService.getAPI(apiService.getAllPostsAPI);
-        return response.render('pages/single', { resultJSON });
+    router.get('/:param', async (request, response) => {
+        var resultJSON = await apiService.getAPI(apiService.getPost + request.params.param);
+        response.render('pages/single', { resultJSON });
     });
 
     return router;
 }
+*/

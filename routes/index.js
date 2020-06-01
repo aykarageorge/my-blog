@@ -11,10 +11,19 @@ module.exports = () => {
     router.get('/', async (request, response) => {
         var resultJSON = await apiService.getAPI(apiService.getAllPostsAPI);
         resultJSON = homeService.homePageAPI(resultJSON);
-        return response.render('pages/index', { resultJSON });
+        response.render('pages/index', { resultJSON });
     });
 
-    router.use('/blog_page', blogPageRoute(apiService));
+    router.get('/:param', async (request, response) => {
+        var resultJSON = await apiService.getAPI(apiService.getPost + request.params.param);
+        response.render('pages/single', { resultJSON });
+    });
+
+    /*
+    **** Use below method to call APIs when making different modules for routes
+    */
+
+    // router.use('/:param', blogPageRoute(apiService));
 
     return router;
 }

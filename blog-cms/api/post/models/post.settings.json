@@ -33,7 +33,7 @@
         "videos"
       ],
       "plugin": "upload",
-      "required": true
+      "required": false
     },
     "blog_id": {
       "type": "uid",
@@ -51,6 +51,15 @@
       "collection": "category",
       "via": "posts",
       "dominant": true
+    },
+    "head_media": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": true
     }
   }
 }

@@ -1,9 +1,11 @@
+const showdown = require('showdown');
+
 module.exports.homePageAPI = function (data) {
     var count = 0;
     var homeData = [];
-    var category = [];
-    var media = [];
     data.forEach(post => {
+        var category = [];
+        var media = [];
         if (post.is_live && count < 6) {
             count++;
 
@@ -21,12 +23,17 @@ module.exports.homePageAPI = function (data) {
                 });
             });
 
+
+            converter = new showdown.Converter(),
+                text = post.content.slice(0, 60),
+                html = converter.makeHtml(text);
             homeData.push({
                 "url": post.blog_id,
                 "title": post.title,
-                "content": post.content.slice(0, 60),
+                "content": html,
                 "posted_on": post.posted_on,
                 "category": category,
+                "headmast_url": post.head_media.url,
                 "media": media
             });
         }
