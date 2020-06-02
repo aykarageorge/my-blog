@@ -3,6 +3,7 @@ const router = express.Router();
 
 const apiService = require('../services/APIService');
 const homeService = require('../services/HomeService');
+const postService = require('../services/PostService');
 
 const blogPageRoute = require('./blog_page');
 
@@ -16,6 +17,7 @@ module.exports = () => {
 
     router.get('/:param', async (request, response) => {
         var resultJSON = await apiService.getAPI(apiService.getPost + request.params.param);
+        resultJSON = postService.postPageAPI(resultJSON[0]);
         response.render('pages/single', { resultJSON });
     });
 
